@@ -72,7 +72,38 @@ https://poe.ninja/poe2/pob/raw/{id}
 ```
 - Returns JSON build data
 
-## GGG Official APIs (require 403 handling via Referer)
+## GGG Official APIs
+
+### OAuth API (requires GGG registration)
+- **Base URL**: `https://www.pathofexile.com`
+- **Auth endpoint**: `POST /oauth/token`
+- **Authorize endpoint**: `GET /oauth/authorize`
+- **Scopes required for character data**: `account:profile`, `account:characters`, `account:leagues`
+- **Scopes**:
+  - `account:profile` — basic profile (name, UUID, locale, twitch link)
+  - `account:leagues` — available leagues
+  - `account:characters` — list characters, get specific character data (equipment, inventory, passives, skills)
+  - `account:stashes` — stash tabs (PoE1 only)
+  - `account:item_filter` — manage item filters
+  - `account:league_accounts` — atlas passives (PoE1 only)
+- **IMPORTANT**: GGG docs state: "We are currently unable to process new applications." New OAuth registrations are paused.
+- **OAuth flow**: Authorization Code Grant (PKCE) or Client Credentials Grant (for service-level access)
+- **Token management**: Access tokens expire; refresh tokens last 90 days
+
+### Build Planner API (PoE2 only)
+- **Docs**: `https://www.pathofexile.com/developer/docs/game#build-planner`
+- **IMPORTANT**: "Editing or creating builds within Path of Exile 2 is currently not supported" via the game/launcher
+- **Website**: Subscribe to build guides at `pathofexile2.com`
+- **File format**: `.build` files (JSON) placed in `BuildPlanner` directory:
+  - Windows: `C:\Users\<Name>\Documents\My Games\Path of Exile 2\BuildPlanner\`
+  - Linux (Proton): `~/.local/share/Steam/steamapps/compatdata/2315204395/pfx/drive_c/users/steamuser/Documents/My Games/Path of Exile 2/BuildPlanner/`
+- **Schema**: Single root `Build` JSON object with:
+  - `name` (string), `description` (?string), `ascendancy` (?string)
+  - `passives` (?array of string or BuildPassive)
+  - `skills` (?array of string or BuildSkill)
+  - `items` (?array of BuildItem)
+- **Tools**: `scripts/build_generator.py` generates .build files from GGG schema
+- **Example**: `builds/shield_wall_mercenary.build`
 
 ### GGG PoE2 Web API Endpoints
 - `https://www.pathofexile.com/poe2/api/skills` — Returns HTML wrapper (needs Referer)

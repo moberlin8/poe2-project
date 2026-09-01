@@ -1,0 +1,19 @@
+{
+  "name": "Marauder Starter",
+  "description": "Generated build: Marauder Starter",
+  "ascendancy": "Marauder1",
+  "passives": [
+    "26895",
+    "37956",
+    "35581",
+    "53443",
+    "20645",
+    "59767",
+    "31292",
+    "64284",
+    "58528",
+    "45363"
+  ],
+  "skills": [],
+  "items": []
+}
