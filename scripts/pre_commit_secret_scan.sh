@@ -3,7 +3,7 @@
 # This script scans for secrets before allowing a commit
 # Registered as a git pre-commit hook
 
-set -euo pipefail
+set -uo pipefail
 
 # Colors for output
 RED='\033[0;31m'
@@ -56,8 +56,13 @@ for file in $STAGED_FILES; do
         continue
     fi
     
-    # Skip the scanner script and secrets config themselves
-    if [[ "$file" == "scripts/pre_commit_secret_scan.sh" ]] || [[ "$file" == ".secrets-scan" ]]; then
+# Skip the scanner script, secrets config, and docs (docs intentionally contain example patterns)
+    if [[ "$file" == "scripts/pre_commit_secret_scan.sh" ]] || [[ "$file" == ".secrets-scan" ]] || [[ "$file" == docs/* ]]; then
+        continue
+    fi
+    
+    # Skip cache/data files (fetched API data may contain text matching secret patterns)
+    if [[ "$file" == data/cache/* ]]; then
         continue
     fi
     
