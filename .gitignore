@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+.ve/
+
+# Environment variables (NEVER commit secrets)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+output/*.log
+
+# Local data (large files, user-specific paths)
+data/*.json
+data/*.db
+data/skill_tree.json
+!data/.gitkeep
+
+# Images (local cache)
+images/*.jpg
+images/*.png
+images/*.jpeg
+!images/.gitkeep
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Output (generated content)
+output/*.md
+output/*.txt
+!output/.gitkeep
